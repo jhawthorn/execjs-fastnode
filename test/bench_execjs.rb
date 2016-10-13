@@ -1,0 +1,1 @@
+../execjs/test/bench_execjs.rb
