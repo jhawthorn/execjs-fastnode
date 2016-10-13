@@ -1,0 +1,3 @@
+[submodule "execjs"]
+	path = execjs
+	url = https://github.com/rails/execjs
