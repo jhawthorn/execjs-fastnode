@@ -1,6 +1,10 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 
+task :bench do
+  sh 'ruby -Ilib -r./test/shim test/bench_execjs.rb'
+end
+
 task :test do
   ENV["EXECJS_RUNTIME"] = 'FastNode'
 end
