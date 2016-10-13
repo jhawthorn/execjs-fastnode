@@ -1,7 +1,8 @@
 language: ruby
 cache: bundler
 sudo: false
-
+before_script:
+  - node --version
 matrix:
   include:
     - rvm: 2.0.0
