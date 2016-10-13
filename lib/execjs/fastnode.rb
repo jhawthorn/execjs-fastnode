@@ -1,7 +1,7 @@
 require "execjs/fastnode/version"
 
-module Execjs
-  module Fastnode
+module ExecJS
+  module FastNode
     # Your code goes here...
   end
 end

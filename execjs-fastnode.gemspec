@@ -5,7 +5,7 @@ require 'execjs/fastnode/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "execjs-fastnode"
-  spec.version       = Execjs::Fastnode::VERSION
+  spec.version       = ExecJS::FastNode::VERSION
   spec.authors       = ["John Hawthorn"]
   spec.email         = ["john.hawthorn@gmail.com"]
 
