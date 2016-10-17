@@ -51,8 +51,6 @@ module ExecJS
         end
 
         def eval(source, options = {})
-          source = encode(source)
-
           if /\S/ =~ source
             raw_exec("(#{source})")
           end
