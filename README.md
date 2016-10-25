@@ -58,6 +58,18 @@ I'd like to, but it will take time. The goal of this endeavour is to give users 
 
 I have sent a pull request upstream to [use vm.runInContext](https://github.com/rails/execjs/pull/55), which would be the first step to merging this upstream.
 
+## Why not just use therubyracer?
+
+Maybe you should, if you need the speed.
+
+Heroku [recommends againts it](https://devcenter.heroku.com/articles/rails-asset-pipeline#therubyracer) as do various stack overflow answers with vague mentions of high memory usage.
+I haven't seen any benchmarks or bug reports that demonstrate this, so I consider these claims somewhat suspect.
+
+[mini_racer](https://github.com/discourse/mini_racer) is another option.
+
+The ExecJS Node runtime has its benefits as well. It should works on jRuby and other non-MRI runtimes.
+If this were merged upsteam it would give developers fast javascript execution without needing an extra gem or configuration, just a working `node` somewhere in `$PATH`.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
