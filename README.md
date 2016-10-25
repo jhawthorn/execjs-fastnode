@@ -29,13 +29,11 @@ This implementation avoids this by starting an always running Node.js process co
 
 ## Is this production ready?
 
-No.
-
-(but I hope it will be soon)
+Probably not, but I hope it will be soon.
 
 It is not yet threadsafe and no effort is made to handle catastrophic errors (Node.js crashing, running out of memory, being killed).
 
-It might be fine for development.
+It's probably fine for development.
 
 ## Installation
 
