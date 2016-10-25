@@ -35,7 +35,7 @@ This implementation avoids this by starting an always running Node.js process co
 
 Maybe? It needs more testing to be labeled as such. If you encounter any troubles please [file an issue](https://github.com/jhawthorn/execjs-fastnode/issues/new).
 
-Currently minimal effort is made to handle catastrophic errors: Node.js crashing, running out of memory, being killed. All of which result in Errno::EPIPE: Broken pipe for fufure ExecJS calls.
+Currently minimal effort is made to handle catastrophic errors: Node.js crashing, running out of memory, being killed. All of which result in `Errno::EPIPE: Broken pipe` for future ExecJS calls.
 
 It's probably fine for development.
 
@@ -79,7 +79,7 @@ I haven't seen any benchmarks or bug reports that demonstrate this, so I conside
 [mini_racer](https://github.com/discourse/mini_racer) is another option.
 
 The ExecJS Node runtime has its benefits as well. It should works on jRuby and other non-MRI runtimes.
-If this were merged upsteam it would give developers fast javascript execution without needing an extra gem or configuration, just a working `node` somewhere in `$PATH`.
+If this were merged upstream it would give developers fast javascript execution without needing an extra gem or configuration, just a working `node` somewhere in `$PATH`.
 
 ## Development
 
