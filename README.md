@@ -27,9 +27,9 @@ The existing ExecJS runtime has to run a new Node.js process each time any JS is
 
 This implementation avoids this by starting an always running Node.js process connected by pipes to STDIN and STDOUT. The JS to execute is piped into the process and the results are recieved from its output. Isolation between different ExecJS contexts is achieved through Node's [vm.Script](https://nodejs.org/api/vm.html).
 
-| Old | New |
+| ExecJS FastNode | Standard ExecJS Node |
 | --- | --- |
-| ![](docs/example_old.png) | ![](docs/example_new.png) |
+| ![](docs/example_new.png) | ![](docs/example_old.png) |
 
 ## Is this production ready?
 
