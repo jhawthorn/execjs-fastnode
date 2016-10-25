@@ -41,18 +41,27 @@ It's probably fine for development.
 
 ## Installation
 
-Add this line to your application's Gemfile before any other gems depending on execjs:
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'execjs-fastnode'
-
-# Must be before
-# gem 'execjs'
-# or
-# gem 'rails'
 ```
 
 And then `bundle install`. You know the drill.
+
+You can verify that this runtime is being autodetected and used by checking `ExecJS.runtime` in a console.
+
+You can force a certain runtime to be used using `EXECJS_RUNTIME=FastNode`
+
+```
+$ EXECJS_RUNTIME=FastNode bin/console
+> ExecJS.runtime
+=> #<ExecJS::FastNode::ExternalPipedRuntime:0x005599c0d38740 @name="Node.js (V8) fast"...
+
+$ EXECJS_RUNTIME=Node bin/console
+> ExecJS.runtime
+=> #<ExecJS::ExternalRuntime:0x00559c440347c0 @name="Node.js (V8)" ...
+```
 
 ## Why not upstream this to execjs?
 
