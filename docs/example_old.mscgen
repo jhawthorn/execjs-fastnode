@@ -1,0 +1,25 @@
+msc {
+  hscale = "1";
+
+  ruby,node;
+
+  ruby=>ruby [ label = "c = ExecJS.compile(...)" ];
+  ruby=>ruby [ label = "c.call('CoffeeScript', 'compile', ...)" ];
+  node=>node [ label = "start" ] ;
+  ruby->node [ label = "CoffeeScript source code" ] ;
+  ruby->node [ label = "CoffeeScript.compile('(x) -> x * x')" ] ;
+  node=>node [ label = "Evaluate CoffeeScript source" ] ;
+  node=>node [ label = "CoffeeScript.compile(...)" ] ;
+  node->ruby [ label = "\"(function(x){ return x * x })\"" ] ;
+  node=>node [ label = "exit" ] ;
+||| ;
+  ruby=>ruby [ label = "c.call('CoffeeScript', 'compile', ...)" ];
+  node=>node [ label = "start" ] ;
+  ruby->node [ label = "CoffeeScript source code" ] ;
+  ruby->node [ label = "CoffeeScript.compile('(x) -> x * 2')" ] ;
+  node=>node [ label = "Evaluate CoffeeScript source" ] ;
+  node=>node [ label = "CoffeeScript.compile(...)" ] ;
+  node->ruby [ label = "\"(function(x){ return x * 2 })\"" ] ;
+  node=>node [ label = "exit" ] ;
+}
+
