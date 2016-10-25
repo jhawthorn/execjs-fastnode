@@ -33,9 +33,9 @@ This implementation avoids this by starting an always running Node.js process co
 
 ## Is this production ready?
 
-Probably not, but I hope it will be soon.
+Maybe? It needs more testing to be labeled as such. If you encounter any troubles please [file an issue](https://github.com/jhawthorn/execjs-fastnode/issues/new).
 
-It is not yet threadsafe and no effort is made to handle catastrophic errors (Node.js crashing, running out of memory, being killed).
+Currently minimal effort is made to handle catastrophic errors: Node.js crashing, running out of memory, being killed. All of which result in Errno::EPIPE: Broken pipe for fufure ExecJS calls.
 
 It's probably fine for development.
 
