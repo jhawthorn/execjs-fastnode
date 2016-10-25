@@ -1,6 +1,7 @@
 require "tmpdir"
 require 'json'
 require "open3"
+require "thread"
 require "execjs/runtime"
 require "execjs/fastnode/command"
 
@@ -11,9 +12,13 @@ module ExecJS
         attr_reader :stdin, :stdout
 
         def initialize(options)
-          @stdin, @stdout, @wait_thr = Open3.popen2(options[:binary], options[:runner_path])
+          @mutex = Mutex.new
+          @stdin = @stdout = @wait_thr = nil
+          @options = options
+        end
 
-          ObjectSpace.define_finalizer(self, self.class.finalize(@stdin))
+        def started?
+          !!@stdin
         end
 
         def self.finalize(stdin)
@@ -28,9 +33,28 @@ module ExecJS
           command("deleteContext", context)
         end
 
+        def start
+          return if started?
+          @mutex.synchronize do
+            # will double check started? with the lock held
+            start_without_synchronization
+          end
+        end
+
+        private
+
+        def start_without_synchronization
+          return if started?
+          @stdin, @stdout, @wait_thr = Open3.popen2(@options[:binary], @options[:runner_path])
+          ObjectSpace.define_finalizer(self, self.class.finalize(@stdin))
+        end
+
         def command(cmd, *arguments)
-          @stdin.puts(::JSON.generate({cmd: cmd, args: arguments}))
-          result = ::JSON.parse(@stdout.gets, create_additions: false)
+          start
+          @mutex.synchronize do
+            @stdin.puts(::JSON.generate({cmd: cmd, args: arguments}))
+            result = ::JSON.parse(@stdout.gets, create_additions: false)
+          end
         end
       end
 
