@@ -34,9 +34,7 @@ module ExecJS
         end
 
         def start
-          return if started?
           @mutex.synchronize do
-            # will double check started? with the lock held
             start_without_synchronization
           end
         end
@@ -50,10 +48,11 @@ module ExecJS
         end
 
         def command(cmd, *arguments)
-          start
           @mutex.synchronize do
+            start_without_synchronization
             @stdin.puts(::JSON.generate({cmd: cmd, args: arguments}))
-            result = ::JSON.parse(@stdout.gets, create_additions: false)
+            str = @stdout.gets
+            result = ::JSON.parse(str, create_additions: false)
           end
         end
       end
@@ -126,16 +125,14 @@ module ExecJS
         @deprecated  = !!options[:deprecated]
         @binary      = nil
 
+        @vm = VM.new(
+          binary: binary,
+          runner_path: @runner_path
+        )
+
         @popen_options = {}
         @popen_options[:external_encoding] = @encoding if @encoding
         @popen_options[:internal_encoding] = ::Encoding.default_internal || 'UTF-8'
-      end
-
-      def vm
-        @vm ||= VM.new(
-          binary: @binary,
-          runner_path: @runner_path
-        )
       end
 
       def available?
