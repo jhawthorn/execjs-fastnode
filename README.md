@@ -78,7 +78,7 @@ I haven't seen any benchmarks or bug reports that demonstrate this, so I conside
 
 [mini_racer](https://github.com/discourse/mini_racer) is another option.
 
-The ExecJS Node runtime has its benefits as well. It should works on jRuby and other non-MRI runtimes.
+The ExecJS Node runtime has its benefits as well. It should work on jRuby and other non-MRI runtimes.
 If this were merged upstream it would give developers fast javascript execution without needing an extra gem or configuration, just a working `node` somewhere in `$PATH`.
 
 ## Development
