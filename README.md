@@ -11,10 +11,10 @@ Much.
 ```
 $ rake bench
 ...
-                               user     system      total        real
-Node.js (V8) fast   0.000000   0.000000   0.000000 (  0.069723)
-therubyracer (V8)   0.020000   0.000000   0.020000 (  0.018010)
-Node.js (V8)        0.000000   0.010000   1.470000 (  1.487579)
+                    user       system     total      real
+Node.js (V8) fast   0.000000   0.000000   0.000000   (0.069723)
+therubyracer (V8)   0.020000   0.000000   0.020000   (0.018010)
+Node.js (V8)        0.000000   0.010000   1.470000   (1.487579)
 ```
 
 Okay, so it's not as fast as `therubyracer`, but it's 20x faster than the standard ExecJS Node.js implementation.
@@ -95,4 +95,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/jhawth
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
