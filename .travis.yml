@@ -3,11 +3,21 @@ cache: bundler
 sudo: false
 before_script:
   - node --version
-matrix:
-  include:
-    - rvm: 2.0.0
-    - rvm: 2.1
-    - rvm: 2.2
-    - rvm: 2.3.1
-    - rvm: jruby-19mode
-    - os: osx
+env:
+  global:
+    EXECJS_RUNTIME: FastNode
+  matrix:
+    - NODE_VERSION=v0.10
+    - NODE_VERSION=v0.12
+    - NODE_VERSION=v4
+    - NODE_VERSION=v6
+rvm:
+  - 2.0.0
+  - 2.3.1
+  - jruby-19mode
+before_install:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+os:
+  - osx
+  - linux
