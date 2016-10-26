@@ -16,7 +16,7 @@ rvm:
   - 2.3.1
   - jruby-19mode
 before_install:
-  - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+  - . $HOME/.nvm/nvm.sh
   - nvm install $NODE_VERSION
 os:
   - osx
