@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
-gem 'therubyracer'
+gem 'therubyracer', platforms: :mri
 
 gemspec
