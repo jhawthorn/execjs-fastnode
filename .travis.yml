@@ -3,6 +3,17 @@ cache: bundler
 sudo: false
 before_script:
   - node --version
+env:
+  global:
+    EXECJS_RUNTIME: FastNode
+  matrix:
+    - NODE_VERSION=v0.10
+    - NODE_VERSION=v0.12
+    - NODE_VERSION=v4
+    - NODE_VERSION=v6
+before_install:
+  - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+  - nvm install $NODE_VERSION
 matrix:
   include:
     - rvm: 2.0.0
