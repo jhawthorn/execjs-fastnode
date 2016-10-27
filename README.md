@@ -25,7 +25,7 @@ The benchmark measures the time to compile the javascript CoffeeScript compiler 
 
 The existing ExecJS runtime has to run a new Node.js process each time any JS is to be run. This means that if you are loading up the CoffeeScript compiler in order to compile some sprockets assets, it needs to reload the node executable and the entire coffeescript compiler for each file it is compiling.
 
-This implementation avoids this by starting an always running Node.js process connected by pipes to STDIN and STDOUT. The JS to execute is piped into the process and the results are recieved from its output. Isolation between different ExecJS contexts is achieved through Node's [vm.Script](https://nodejs.org/api/vm.html).
+This implementation avoids this by starting a persistently running Node.js process connected through a UNIX socket. Isolation between different ExecJS contexts is achieved through Node's [vm.Script](https://nodejs.org/api/vm.html).
 
 | ExecJS FastNode | Standard ExecJS Node |
 | --- | --- |
@@ -35,7 +35,7 @@ This implementation avoids this by starting an always running Node.js process co
 
 Maybe? It needs more testing to be labeled as such. If you encounter any troubles please [file an issue](https://github.com/jhawthorn/execjs-fastnode/issues/new).
 
-Currently minimal effort is made to handle catastrophic errors: Node.js crashing, running out of memory, being killed. All of which result in `Errno::EPIPE: Broken pipe` for future ExecJS calls.
+Currently minimal effort is made to handle catastrophic errors: Node.js crashing, running out of memory, being killed.
 
 It's probably fine for development.
 
@@ -81,6 +81,11 @@ I haven't seen any benchmarks or bug reports that demonstrate this, so I conside
 The ExecJS Node runtime has its benefits as well. It should work on jRuby and other non-MRI runtimes.
 If this were merged upstream it would give developers fast javascript execution without needing an extra gem or configuration, just a working `node` somewhere in `$PATH`.
 
+## Limitations
+
+* Syntax errors on Node.js versions 0.10.x and 4.x can't report the exact line number of the error. Instead they will always display `(execjs):1`.
+* This only runs a single node process, so javascript execution can only make use of a single processor. This isn't much of an issue because sprockets doesn't parallelize builds. This runtime is so much faster than the original that this would only be an issue with very specific use cases.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -90,7 +95,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/jhawthorn/execjs-fastnode.
-
 
 ## License
 
