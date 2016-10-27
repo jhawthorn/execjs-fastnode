@@ -14,7 +14,7 @@ env:
 rvm:
   - 2.0.0
   - 2.3.1
-  - jruby-19mode
+  - jruby-head
 before_install:
   - . $HOME/.nvm/nvm.sh
   - nvm install $NODE_VERSION
