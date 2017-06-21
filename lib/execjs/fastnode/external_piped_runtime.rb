@@ -1,4 +1,5 @@
 require "net/http"
+require "securerandom"
 require "socket"
 require "thread"
 require "tmpdir"
