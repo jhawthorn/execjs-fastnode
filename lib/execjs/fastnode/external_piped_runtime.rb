@@ -91,7 +91,7 @@ module ExecJS
           @pid = Process.spawn({"PORT" => @socket_path.to_s}, @options[:binary], @options[:runner_path])
 
           retries = 20
-          while !File.exists?(@socket_path)
+          while !File.exist?(@socket_path)
             sleep 0.05
             retries -= 1
 
