@@ -1,16 +1,22 @@
-name: Node CI
+name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [8.x, 10.x, 12.x]
         ruby-version: [2.4.x, 2.5.x, 2.6.x]
+
+    runs-on: ubuntu-latest
+    name: Test Ruby ${{ matrix.ruby-version }} and Node.js ${{ matrix.node-version }}
 
     steps:
     - uses: actions/checkout@v1
