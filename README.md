@@ -1,7 +1,5 @@
 # ExecJS FastNode
 
-[![Build Status](https://travis-ci.org/jhawthorn/execjs-fastnode.svg?branch=master)](https://travis-ci.org/jhawthorn/execjs-fastnode)
-
 ## What's this?
 
 An alternative implementation of ExecJS's Node.js integration. This aims to speed up sprockets compilation without needing to embed a javascript interpreter inside of ruby like [therubyracer](cowboyd/therubyracer).
