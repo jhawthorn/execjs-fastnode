@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        ruby-version: [2.4.x, 2.5.x, 2.6.x]
+
+    runs-on: ubuntu-latest
+    name: Test Ruby ${{ matrix.ruby-version }} and Node.js ${{ matrix.node-version }}
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Run tests
+      run: |
+        bundle exec rake
+      env:
+        EXECJS_RUNTIME: FastNode
